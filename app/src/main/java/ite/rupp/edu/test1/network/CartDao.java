@@ -1,20 +1,24 @@
 package ite.rupp.edu.test1.network;
 
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import java.util.List;
+import androidx.lifecycle.LiveData;
+import androidx.room.*;
 import ite.rupp.edu.test1.models.CartItem;
+import java.util.List;
 
 @Dao
 public interface CartDao {
-    @Query("SELECT * FROM cart_items")
-    List<CartItem> getAll();
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(CartItem cartItem);
+    void insert(CartItem item);
 
-    @Query("DELETE FROM cart_items WHERE id = :id")
-    void delete(int id);
+    @Update
+    void update(CartItem item);
+
+    @Delete
+    void delete(CartItem item);
+
+    @Query("SELECT * FROM cart_items")
+    LiveData<List<CartItem>> getAllItems();
+
+    @Query("DELETE FROM cart_items")
+    void clearAll();
 }

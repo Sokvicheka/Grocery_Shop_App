@@ -4,16 +4,20 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final String BASE_URL = "https://api.example.com/"; // Replace with your API URL
-    private static Retrofit retrofit = null;
+    private static final String BASE_URL = "https://fakestoreapi.com/";
+    private static Retrofit instance;
 
-    public static ApiService getApiService() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
+    public static Retrofit getInstance() {
+        if (instance == null) {
+            instance = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-        return retrofit.create(ApiService.class);
+        return instance;
+    }
+
+    public static ApiService getApiService() {
+        return getInstance().create(ApiService.class);
     }
 }

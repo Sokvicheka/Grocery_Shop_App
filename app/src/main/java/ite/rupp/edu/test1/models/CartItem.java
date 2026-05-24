@@ -6,27 +6,17 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "cart_items")
 public class CartItem {
     @PrimaryKey
-    private int id;
-    private String name;
-    private double price;
-    private int quantity;
+    public int productId;
+    public String title;
+    public double price;
+    public String imageUrl;
+    public int quantity;
 
-    public CartItem() {}
-
-    public CartItem(int id, String name, double price, int quantity) {
-        this.id = id;
-        this.name = name;
+    public CartItem(int productId, String title, double price, String imageUrl, int quantity) {
+        this.productId = productId;
+        this.title = title;
         this.price = price;
+        this.imageUrl = imageUrl;
         this.quantity = quantity;
     }
-
-    // Getters and Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
 }
