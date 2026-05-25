@@ -1,3 +1,24 @@
 <resources>
-    <string name="app_name">test1</string>
+    <string name="app_name">GroceryApp</string>
+    <string name="title_home">Daily Grocery Market</string>
+    <string name="title_popular_products">Popular Products</string>
+    <string name="category_all">All</string>
+    <string name="category_jewelery">Jewelery</string>
+    <string name="category_electronics">Electronics</string>
+    <string name="category_clothing">Clothing</string>
+    <string name="title_cart">My Cart</string>
+    <string name="label_total">Total</string>
+    <string name="btn_checkout">Checkout</string>
+    <string name="title_product_description">Product Description</string>
+    <string name="btn_add_to_cart">Add to Cart</string>
+    <string name="title_order_tracking">Order Tracking</string>
+    <string name="label_delivery_address">Delivery Address</string>
+    <string name="default_address">Phnom Penh, Cambodia</string>
+    <string name="label_estimated_time">Estimated Time</string>
+    <string name="default_estimated_time">20–25 min (on the way)</string>
+    <string name="placeholder_step_title">Step Title</string>
+    <string name="placeholder_step_desc">Description</string>
+    <string name="desc_product_image">Product Image</string>
+    <string name="desc_search">Search</string>
+    <string name="desc_add_to_cart">Add to Cart Icon</string>
 </resources>

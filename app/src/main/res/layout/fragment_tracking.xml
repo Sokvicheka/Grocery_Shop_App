@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_order_tracking"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:textColor="@color/text_dark"/>
+
+    <!-- Timeline Steps -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <include
+            android:id="@+id/step_placed"
+            layout="@layout/item_tracking_step" />
+
+        <include
+            android:id="@+id/step_confirmed"
+            layout="@layout/item_tracking_step" />
+
+        <include
+            android:id="@+id/step_processing"
+            layout="@layout/item_tracking_step" />
+
+        <include
+            android:id="@+id/step_delivered"
+            layout="@layout/item_tracking_step" />
+    </LinearLayout>
+
+    <!-- Delivery Info Card -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_delivery_address"
+                android:textStyle="bold"
+                android:textColor="@color/text_dark"/>
+            <TextView
+                android:id="@+id/txt_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_address"
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_estimated_time"
+                android:textStyle="bold"
+                android:textColor="@color/text_dark"
+                android:layout_marginTop="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_estimated_time"
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
