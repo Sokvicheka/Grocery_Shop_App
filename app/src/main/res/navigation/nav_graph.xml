@@ -9,15 +9,51 @@
         android:id="@+id/homeFragment"
         android:name="ite.rupp.edu.test1.fragments.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_detail"
+            app:destination="@id/productDetailFragment" />
+        <action
+            android:id="@+id/action_home_to_category"
+            app:destination="@id/categoryFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/cartFragment"
         android:name="ite.rupp.edu.test1.fragments.CartFragment"
         android:label="Cart"
         tools:layout="@layout/fragment_cart" />
+
     <fragment
         android:id="@+id/ordersFragment"
         android:name="ite.rupp.edu.test1.fragments.OrdersFragment"
         android:label="Orders"
-        tools:layout="@layout/fragment_orders" />
+        tools:layout="@layout/fragment_orders">
+        <action
+            android:id="@+id/action_orders_to_tracking"
+            app:destination="@id/trackingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="ite.rupp.edu.test1.fragments.CategoryFragment"
+        android:label="Category"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_category_to_detail"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="ite.rupp.edu.test1.fragments.ProductDetailFragment"
+        android:label="Product Detail"
+        tools:layout="@layout/fragment_product_detail" />
+
+    <fragment
+        android:id="@+id/trackingFragment"
+        android:name="ite.rupp.edu.test1.fragments.TrackingFragment"
+        android:label="Tracking"
+        tools:layout="@layout/fragment_tracking" />
+
 </navigation>

@@ -1,13 +1,17 @@
 package ite.rupp.edu.test1.fragments;
 
 import android.os.Bundle;
-import android.view.*;
-import android.widget.*;
-import androidx.annotation.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.*;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import ite.rupp.edu.test1.R;
+import ite.rupp.edu.test1.adapters.CartAdapter;
 import ite.rupp.edu.test1.models.CartItem;
 import ite.rupp.edu.test1.network.AppDatabase;
 import ite.rupp.edu.test1.network.CartDao;
@@ -43,14 +47,18 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemChan
             recyclerView.setAdapter(adapter);
 
             double total = 0;
-            for (CartItem item : items) total += item.price * item.quantity;
+            if (items != null) {
+                for (CartItem item : items) {
+                    total += item.price * item.quantity;
+                }
+            }
             txtTotal.setText(String.format("$%.2f", total));
         });
 
-        view.findViewById(R.id.btn_checkout).setOnClickListener(v ->
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_cart_to_tracking)
-        );
+        // Checkout button
+        view.findViewById(R.id.btn_checkout).setOnClickListener(v -> {
+            // Handle checkout
+        });
     }
 
     @Override

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GroceryApp</string>
+    <string name="app_name">BestBuy</string>
     <string name="title_home">Daily Grocery Market</string>
     <string name="title_popular_products">Popular Products</string>
     <string name="category_all">All</string>
