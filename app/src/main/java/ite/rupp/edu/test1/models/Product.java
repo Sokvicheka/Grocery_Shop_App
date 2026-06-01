@@ -24,6 +24,15 @@ public class Product {
     @SerializedName("rating")
     private Rating rating;
 
+    public Product() {}
+
+    public Product(int id, String title, double price, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
     // Getters
     public int getId() { return id; }
     public String getTitle() { return title; }

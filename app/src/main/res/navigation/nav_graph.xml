@@ -22,7 +22,11 @@
         android:id="@+id/cartFragment"
         android:name="ite.rupp.edu.test1.fragments.CartFragment"
         android:label="Cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cart_to_tracking"
+            app:destination="@id/trackingFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/ordersFragment"

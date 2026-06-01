@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ite.rupp.edu.test1.R;
@@ -15,6 +16,7 @@ import ite.rupp.edu.test1.adapters.CartAdapter;
 import ite.rupp.edu.test1.models.CartItem;
 import ite.rupp.edu.test1.network.AppDatabase;
 import ite.rupp.edu.test1.network.CartDao;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
@@ -39,25 +41,29 @@ public class CartFragment extends Fragment implements CartAdapter.OnCartItemChan
         txtTotal = view.findViewById(R.id.txt_total);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        // Initialize with empty adapter immediately to fix "No adapter attached" warning
+        adapter = new CartAdapter(new ArrayList<>(), this);
+        recyclerView.setAdapter(adapter);
+
         cartDao = AppDatabase.getInstance(requireContext()).cartDao();
 
         // Observe LiveData from Room
         cartDao.getAllItems().observe(getViewLifecycleOwner(), items -> {
-            adapter = new CartAdapter(items, this);
-            recyclerView.setAdapter(adapter);
-
-            double total = 0;
             if (items != null) {
+                adapter = new CartAdapter(items, this);
+                recyclerView.setAdapter(adapter);
+
+                double total = 0;
                 for (CartItem item : items) {
                     total += item.price * item.quantity;
                 }
+                txtTotal.setText(String.format("$%.2f", total));
             }
-            txtTotal.setText(String.format("$%.2f", total));
         });
 
-        // Checkout button
+        // Checkout button - Navigate to tracking page
         view.findViewById(R.id.btn_checkout).setOnClickListener(v -> {
-            // Handle checkout
+            Navigation.findNavController(v).navigate(R.id.action_cart_to_tracking);
         });
     }
 
