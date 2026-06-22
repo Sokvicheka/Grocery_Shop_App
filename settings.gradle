@@ -22,6 +22,15 @@ dependencyResolutionManagement {
     }
 }
 
+// Work around Gradle on Windows failing when this generated report already exists.
+def staleProblemsReport = file("build/reports/problems/problems-report.html")
+if (staleProblemsReport.exists()) {
+    staleProblemsReport.delete()
+}
+def gradleTmpDir = new File(gradle.gradleUserHomeDir, ".tmp")
+if (gradleTmpDir.exists()) {
+    gradleTmpDir.eachFileMatch(~/problems-report.*\.html/) { it.delete() }
+}
+
 rootProject.name = "test1"
 include(":app")
- 

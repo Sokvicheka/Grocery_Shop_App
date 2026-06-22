@@ -1,6 +1,7 @@
 package ite.rupp.edu.test1;
 
 import android.os.Bundle;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 1. Find the custom toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
+        View toolbarBackTouchArea = findViewById(R.id.toolbar_back_touch_area);
 
         // 2. Find the NavHostFragment to get the NavController
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
@@ -36,6 +38,16 @@ public class MainActivity extends AppCompatActivity {
 
             // 4. Setup Toolbar with NavController directly
             NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+            toolbar.setNavigationOnClickListener(v -> navigateBackOrHome());
+            toolbarBackTouchArea.setOnClickListener(v -> navigateBackOrHome());
+
+            navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                int destinationId = destination.getId();
+                boolean canGoBack = destinationId != R.id.homeFragment
+                        && destinationId != R.id.cartFragment
+                        && destinationId != R.id.ordersFragment;
+                toolbarBackTouchArea.setVisibility(canGoBack ? View.VISIBLE : View.GONE);
+            });
 
             // 5. Setup Bottom Navigation
             BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
@@ -45,9 +57,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void navigateBackOrHome() {
+        if (navController == null) {
+            return;
+        }
+
+        if (!navController.popBackStack()) {
+            navController.navigate(R.id.homeFragment);
+        }
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
-        return navController != null
-                && NavigationUI.navigateUp(navController, appBarConfiguration);
+        navigateBackOrHome();
+        return true;
     }
 }

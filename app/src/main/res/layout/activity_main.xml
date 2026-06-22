@@ -15,6 +15,19 @@
         app:titleTextColor="@color/text_dark"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/toolbar_back_touch_area"
+        android:layout_width="56dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:contentDescription="Back"
+        android:focusable="true"
+        android:visibility="gone"
+        android:elevation="8dp"
+        app:layout_constraintStart_toStartOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
