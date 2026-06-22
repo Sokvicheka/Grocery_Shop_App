@@ -11,6 +11,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private NavController navController;
+    private AppBarConfiguration appBarConfiguration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,16 +27,14 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.nav_host_fragment);
 
         if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
+            navController = navHostFragment.getNavController();
 
             // 3. Define top-level destinations (screens where the back arrow should NOT show)
-            AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+            appBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.homeFragment, R.id.cartFragment, R.id.ordersFragment)
                     .build();
 
             // 4. Setup Toolbar with NavController directly
-            // This is the most reliable way: it handles the back icon and the CLICK action automatically.
-            // NOTE: We do not call setSupportActionBar(toolbar) here to avoid conflicts with NavController's own listener.
             NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
 
             // 5. Setup Bottom Navigation
@@ -42,5 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 NavigationUI.setupWithNavController(bottomNav, navController);
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return navController != null
+                && NavigationUI.navigateUp(navController, appBarConfiguration);
     }
 }

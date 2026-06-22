@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.chip.Chip;
 import ite.rupp.edu.test1.R;
 import ite.rupp.edu.test1.adapters.ProductAdapter;
 import ite.rupp.edu.test1.models.Product;
@@ -51,7 +52,26 @@ public class HomeFragment extends Fragment {
         });
         recyclerView.setAdapter(adapter);
 
+        setupCategoryChips(view);
         loadProducts();
+    }
+
+    private void setupCategoryChips(@NonNull View view) {
+        Chip chipAll = view.findViewById(R.id.chip_all);
+        Chip chipJewelery = view.findViewById(R.id.chip_jewelery);
+        Chip chipElectronics = view.findViewById(R.id.chip_electronics);
+        Chip chipClothing = view.findViewById(R.id.chip_clothing);
+
+        chipAll.setOnClickListener(v -> loadProducts());
+        chipJewelery.setOnClickListener(v -> openCategory("jewelery"));
+        chipElectronics.setOnClickListener(v -> openCategory("electronics"));
+        chipClothing.setOnClickListener(v -> openCategory("women's clothing"));
+    }
+
+    private void openCategory(String categoryName) {
+        Bundle args = new Bundle();
+        args.putString("categoryName", categoryName);
+        Navigation.findNavController(requireView()).navigate(R.id.action_home_to_category, args);
     }
 
     private void loadProducts() {
