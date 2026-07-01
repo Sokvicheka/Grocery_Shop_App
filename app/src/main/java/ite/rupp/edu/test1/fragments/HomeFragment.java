@@ -22,7 +22,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 
 public class HomeFragment extends Fragment {
 
@@ -42,6 +44,8 @@ public class HomeFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_products);
         progressBar = view.findViewById(R.id.progress_home);
+
+        searchEditText = view.findViewById(R.id.edt_search);
         
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -54,6 +58,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         setupCategoryChips(view);
+        setupSearch();
         loadProducts();
     }
 
@@ -107,5 +112,22 @@ public class HomeFragment extends Fragment {
         sampleData.add(new Product(3, "Milk", 2.10, ""));
         sampleData.add(new Product(4, "Bread", 1.20, ""));
         adapter.updateData(sampleData);
+    }
+
+    private EditText searchEditText;
+
+    private void setupSearch() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
 }

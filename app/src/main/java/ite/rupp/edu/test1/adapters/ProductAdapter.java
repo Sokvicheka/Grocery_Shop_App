@@ -42,8 +42,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         } else {
             String filterPattern = text.toLowerCase().trim();
             for (Product item : productsFull) {
-                if (item.getTitle().toLowerCase().contains(filterPattern) ||
-                        item.getCategory().toLowerCase().contains(filterPattern)) {
+                String title = item.getTitle() == null ? "" : item.getTitle().toLowerCase();
+                String category = item.getCategory() == null ? "" : item.getCategory().toLowerCase();
+                if (title.contains(filterPattern) || category.contains(filterPattern)) {
                     filteredList.add(item);
                 }
             }
